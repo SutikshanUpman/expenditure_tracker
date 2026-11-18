@@ -7,7 +7,7 @@ export default defineConfig({
   workers: 1,
   use: { baseURL: 'http://127.0.0.1:4173/expenditure_tracker/', trace: 'retain-on-failure' },
   webServer: {
-    command: 'npm run preview -w frontend -- --port 4173',
+    command: 'npm run preview -w frontend -- --mode pages --port 4173',
     cwd: fileURLToPath(new URL('../', import.meta.url)),
     url: 'http://127.0.0.1:4173/expenditure_tracker/',
     timeout: 30000,

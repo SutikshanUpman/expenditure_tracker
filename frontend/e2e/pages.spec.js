@@ -3,11 +3,9 @@ import { test, expect } from '@playwright/test';
 async function openWorkspace(page, id) {
   await page.goto('./');
   await expect(page.getByLabel('Student Name')).toBeVisible({ timeout: 15000 });
-  {
-    await page.getByLabel('Student Name').fill('Pages Test');
-    await page.getByLabel('BT ID (College ID)').fill(id);
-    await page.getByRole('button', { name: 'Continue to Workspace' }).click();
-  }
+  await page.getByLabel('Student Name').fill('Pages Test');
+  await page.getByLabel('BT ID (College ID)').fill(id);
+  await page.getByRole('button', { name: 'Continue to Workspace' }).click();
   await expect(
     page.getByRole('button', { name: 'Add transaction', exact: true }).first(),
   ).toBeEnabled({ timeout: 60000 });
