@@ -1,0 +1,25 @@
+{
+  "name": "spendwise",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n api,web \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "build": "npm run build -w frontend",
+    "start": "npm start -w backend",
+    "db:setup": "npm run db:setup -w backend",
+    "test": "npm test -w backend && npm test -w frontend",
+    "demo": "concurrently -k -n api,web \"node backend/scripts/demo-server.js\" \"npm run dev -w frontend\"",
+    "format": "prettier --write \"frontend/src/**/*.{js,jsx,css}\" \"frontend/*.{js,json,html}\" \"backend/**/*.js\" \"*.{json,yaml}\" \".github/**/*.yml\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "prettier": "^3.6.2"
+  },
+  "engines": {
+    "node": ">=22.12"
+  }
+}

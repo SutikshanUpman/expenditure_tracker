@@ -1,0 +1,5 @@
+// Import the CSV from /api/transactions/export as a table named Transactions.
+Total Income = CALCULATE(SUM(Transactions[amount]), Transactions[transaction_type] = "Income")
+Total Expenses = CALCULATE(SUM(Transactions[amount]), Transactions[transaction_type] = "Expense")
+Available Balance = [Total Income] - [Total Expenses]
+Total Transactions = COUNTROWS(Transactions)
