@@ -28,7 +28,7 @@ test('Pages app saves transactions across reloads and tabs and keeps workspaces 
   await page.getByRole('button', { name: 'Add transaction', exact: true }).first().click();
   const dialog = page.getByRole('dialog', { name: 'Add transaction' });
   await dialog.getByRole('spinbutton').fill('200');
-  await dialog.getByLabel('Category', { exact: true }).selectOption({ label: 'Food' });
+  await dialog.getByRole('combobox').selectOption({ label: 'Food' });
   await dialog.getByLabel(/Description/).fill('Pages test lunch');
   await dialog.getByLabel(/City/).fill('Delhi');
   await dialog.getByRole('button', { name: 'Add transaction', exact: true }).click();
