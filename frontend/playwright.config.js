@@ -6,6 +6,7 @@ export default defineConfig({
   timeout: 90000,
   workers: 1,
   use: {
+    channel: process.env.CI ? 'chrome' : undefined,
     actionTimeout: 15000,
     baseURL: 'http://127.0.0.1:4173/expenditure_tracker/',
     trace: 'retain-on-failure',
