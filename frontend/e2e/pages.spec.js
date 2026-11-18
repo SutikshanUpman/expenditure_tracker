@@ -2,7 +2,8 @@ import { test, expect } from '@playwright/test';
 
 async function openWorkspace(page, id) {
   await page.goto('./');
-  if (await page.getByLabel('Student Name').isVisible()) {
+  await expect(page.getByLabel('Student Name')).toBeVisible({ timeout: 15000 });
+  {
     await page.getByLabel('Student Name').fill('Pages Test');
     await page.getByLabel('BT ID (College ID)').fill(id);
     await page.getByRole('button', { name: 'Continue to Workspace' }).click();
@@ -17,7 +18,13 @@ test('Pages app saves transactions across reloads and tabs and keeps workspaces 
   context,
 }) => {
   const errors = [];
-  page.on('pageerror', (error) => errors.push(error.message));
+  page.on('pageerror', (error) => {
+    errors.push(error.message);
+    console.log('Browser error:', error.message);
+  });
+  page.on('console', (message) => {
+    if (message.type() === 'error') console.log('Browser console:', message.text());
+  });
   await openWorkspace(page, 'BTPAGES001');
   await expect(page.getByText(/Saved only in this browser/)).toBeVisible();
   await page.getByRole('button', { name: 'Add transaction', exact: true }).first().click();
